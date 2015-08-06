@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
 
 namespace SmartCalendar.Models
 {
@@ -16,7 +18,25 @@ namespace SmartCalendar.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual List<Event> Events { get; set; }
+
     }
+
+    public class Event
+    {
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime DateAdd { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
+        public string Location { get; set; }
+        public Category Category { get; set; }
+    }
+
+    public enum Category { Home, Business, Study, Fun }
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -29,5 +49,8 @@ namespace SmartCalendar.Models
         {
             return new ApplicationDbContext();
         }
+
+        public virtual DbSet<Event> Events { get; set; }
+
     }
 }
