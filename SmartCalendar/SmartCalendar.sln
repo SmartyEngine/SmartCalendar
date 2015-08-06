@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCalendar", "SmartCalendar\SmartCalendar.csproj", "{F54ADB86-A774-41C0-BC4E-BC656E9794EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCalendar.Tests", "SmartCalendar.Tests\SmartCalendar.Tests.csproj", "{1F9D1E8B-AA13-4891-96B3-F9EC83B41AB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F54ADB86-A774-41C0-BC4E-BC656E9794EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F54ADB86-A774-41C0-BC4E-BC656E9794EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F54ADB86-A774-41C0-BC4E-BC656E9794EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F54ADB86-A774-41C0-BC4E-BC656E9794EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F9D1E8B-AA13-4891-96B3-F9EC83B41AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F9D1E8B-AA13-4891-96B3-F9EC83B41AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F9D1E8B-AA13-4891-96B3-F9EC83B41AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F9D1E8B-AA13-4891-96B3-F9EC83B41AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
