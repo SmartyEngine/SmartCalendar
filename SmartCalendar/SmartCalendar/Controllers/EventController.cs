@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using SmartCalendar.Models;
+using SmartCalendar.Models.Abstracts;
 using SmartCalendar.Models.EFRepositories;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ namespace SmartCalendar.Controllers
 {
     public class EventController : ApiController
     {
-        private EventRepository repository;
+        private IRepository repository;
 
-        public EventController()
+        public EventController(IRepository repos)
         {
-            repository = new EventRepository();
+            repository = repos;
         }
 
         // GET api/<controller>/5
@@ -32,22 +33,21 @@ namespace SmartCalendar.Controllers
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> UpdateEvent([FromBody]Event item)
+        public async Task<HttpResponseMessage> UpdateEvent([FromBody]Event item)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
             }
             IdentityResult result = await repository.Update(item);
-            IHttpActionResult errorResult = GetErrorResult(result);
+            HttpResponseMessage errorResult = GetErrorResult(result);
 
             if (errorResult != null)
             {
                 return errorResult;
             }
-
-            return Ok();
-        }
+            return Request.CreateResponse(HttpStatusCode.Accepted, item);
+        }        
 
         // DELETE api/<controller>/5
         public void Delete(int id)
@@ -55,11 +55,11 @@ namespace SmartCalendar.Controllers
         }
 
         #region Helpers
-        private IHttpActionResult GetErrorResult(IdentityResult result)
+        private HttpResponseMessage GetErrorResult(IdentityResult result)
         {
             if (result == null)
             {
-                return InternalServerError();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             if (!result.Succeeded)
@@ -75,10 +75,10 @@ namespace SmartCalendar.Controllers
                 if (ModelState.IsValid)
                 {
                     // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }
 
-                return BadRequest(ModelState);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
             return null;

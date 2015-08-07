@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using SmartCalendar.Models.Abstracts;
 
 namespace SmartCalendar.Models
 {
@@ -38,7 +39,7 @@ namespace SmartCalendar.Models
     public enum Category { Home, Business, Study, Fun }
 
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IEventContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -50,7 +51,7 @@ namespace SmartCalendar.Models
             return new ApplicationDbContext();
         }
 
-        public virtual DbSet<Event> Events { get; set; }
+        public DbSet<Event> Events { get; set; }
 
     }
 }

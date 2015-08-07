@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using SmartCalendar.Models.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace SmartCalendar.Models.EFRepositories
 {
-    public class EventRepository
+    public class EventRepository : IRepository
     {
         private ApplicationDbContext context;
 
@@ -27,8 +28,6 @@ namespace SmartCalendar.Models.EFRepositories
 
         public async Task<IdentityResult> Update(Event item)
         {
-            IdentityResult result;
-
             Event dbEntry = await context.Events.FindAsync(item.Id);
             if (dbEntry != null)
             {
@@ -42,16 +41,15 @@ namespace SmartCalendar.Models.EFRepositories
             }
             else
             {
-                result = IdentityResult.Failed("Object not found.");
-                return result;
+                return null;
             }
-            result = await SaveChangesAsync();
+            var result = await SaveChangesAsync();
             return result;
         }
         private async Task<IdentityResult> SaveChangesAsync()
         {
             try
-            {
+            {                
                 await context.SaveChangesAsync();
                 return IdentityResult.Success;
             }
