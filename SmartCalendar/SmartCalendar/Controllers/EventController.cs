@@ -19,13 +19,7 @@ namespace SmartCalendar.Controllers
         public EventController(IRepository repos)
         {
             repository = repos;
-        }
-
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }       
+        }   
 
         [HttpPost]
         public async Task<HttpResponseMessage> CreateEvent([FromBody]Event item)
@@ -83,7 +77,7 @@ namespace SmartCalendar.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> ShowSingleEvent([FromBody] string id)
+        public async Task<HttpResponseMessage> GetEvent([FromBody] string id)
         {
 
             Event result = await repository.TakeEvent(id);
