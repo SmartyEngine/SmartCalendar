@@ -24,7 +24,7 @@ namespace SmartCalendar.Tests.Controllers
 
             //Act
             controller.ModelState.AddModelError("", "");
-            var response = await controller.RemoveEvent(Int32.Parse(GetDemoEvent().Id));
+            var response = await controller.RemoveEvent(GetDemoEvent().Id);
 
             //Assert
             Assert.IsNotNull(response);
@@ -42,7 +42,7 @@ namespace SmartCalendar.Tests.Controllers
             controller.Request.SetConfiguration(new HttpConfiguration());
 
             //Act
-            var response = await controller.RemoveEvent(10);
+            var response = await controller.RemoveEvent("10");
 
             //Assert
             Assert.IsNotNull(response);
@@ -65,7 +65,7 @@ namespace SmartCalendar.Tests.Controllers
             controller.Request.SetConfiguration(new HttpConfiguration());
             
             //Act
-            var response = await controller.RemoveEvent(Int32.Parse(item.Id));
+            var response = await controller.RemoveEvent(item.Id);
             
             //Assert
             Assert.IsNotNull(response);
