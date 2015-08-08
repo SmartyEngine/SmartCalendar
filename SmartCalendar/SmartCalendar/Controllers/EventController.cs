@@ -52,7 +52,7 @@ namespace SmartCalendar.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> RemoveEvent([FromBody] int id)
+        public async Task<HttpResponseMessage> RemoveEvent([FromBody] string id)
         {
             if (!ModelState.IsValid)
             {
