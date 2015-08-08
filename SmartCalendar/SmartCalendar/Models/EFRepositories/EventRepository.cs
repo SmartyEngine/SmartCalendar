@@ -47,7 +47,7 @@ namespace SmartCalendar.Models.EFRepositories
             return result;
         }
 
-        public async Task<IdentityResult> Remove(int id)
+        public async Task<IdentityResult> Remove(string id)
         {
             IdentityResult result;
 
