@@ -11,5 +11,6 @@ namespace SmartCalendar.Models.Abstracts
     {
         Task<IdentityResult> Update(Event item);
         Task<IdentityResult> Remove(string id);
+        Task<IdentityResult> Create(Event item);
     }
 }
