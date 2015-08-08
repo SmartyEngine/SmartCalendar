@@ -57,7 +57,7 @@ namespace SmartCalendar.Tests.Controllers
         public async Task UpdateEventTest_ShouldReturnSameProduct_and_OkStatusCode()
         {
             //arrange
-            var repository = new EventRepository(new TestStoreAppContext());
+            var repository = new EventRepository(new TestAppContext());
             var controller = new EventController(repository);
             controller.Request = new HttpRequestMessage();
             controller.Request.SetConfiguration(new HttpConfiguration());

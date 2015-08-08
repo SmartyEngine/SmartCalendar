@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SmartCalendar.Tests
 {
-    class TestStoreAppContext : IStoreAppContext
+    class TestAppContext : IStoreAppContext
     {
-        public TestStoreAppContext()
+        public TestAppContext()
         {
             this.Events = new TestProductDbSet();
         }
