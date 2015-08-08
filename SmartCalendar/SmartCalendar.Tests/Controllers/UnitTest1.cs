@@ -41,7 +41,8 @@ namespace SmartCalendar.Tests.Controllers
         public async Task UpdateEventTest_ShouldReturn_NotFoundStatusCode_And_NullContent()
         {
             //arrange            
-            var controller = new EventController(new EventRepository());
+            var repository = new EventRepository(new TestAppContext());
+            var controller = new EventController(repository);
             controller.Request = new HttpRequestMessage();
             controller.Request.SetConfiguration(new HttpConfiguration());
             
@@ -57,7 +58,9 @@ namespace SmartCalendar.Tests.Controllers
         public async Task UpdateEventTest_ShouldReturnSameProduct_and_OkStatusCode()
         {
             //arrange
-            var repository = new EventRepository(new TestAppContext());
+            var context = new TestAppContext();
+            context.Events.Add(GetDemoEvent());
+            var repository = new EventRepository(context);            
             var controller = new EventController(repository);
             controller.Request = new HttpRequestMessage();
             controller.Request.SetConfiguration(new HttpConfiguration());

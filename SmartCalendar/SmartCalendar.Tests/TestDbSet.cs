@@ -32,12 +32,12 @@ namespace SmartCalendar.Tests
 
         public override Event Find(params object[] keyValues)
         {
-            return GetDemoEvent();
+            return _data.FirstOrDefault(x => x.Id == (string)keyValues.Single());
         }
 
         public override async Task<Event> FindAsync(System.Threading.CancellationToken cancellationToken, params object[] keyValues)
         {
-            return GetDemoEvent();
+            return _data.FirstOrDefault(x => x.Id == (string)keyValues.Single());
         }
 
         Event GetDemoEvent()
