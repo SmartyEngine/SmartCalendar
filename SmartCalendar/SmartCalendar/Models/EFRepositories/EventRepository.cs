@@ -47,6 +47,25 @@ namespace SmartCalendar.Models.EFRepositories
             return result;
         }
 
+        public async Task<IdentityResult> Remove(int id)
+        {
+            IdentityResult result;
+
+            Event dbEntry = await context.Events.FindAsync(id);
+            if (dbEntry != null)
+            {
+                context.Events.Remove(dbEntry);
+            }
+            else
+            {
+                result = IdentityResult.Failed("Object not found and can't be deleted");
+                return result;
+            }
+            result = await SaveChangesAsync();
+
+            return result;
+        } 
+
         private async Task<IdentityResult> SaveChangesAsync()
         {
             try

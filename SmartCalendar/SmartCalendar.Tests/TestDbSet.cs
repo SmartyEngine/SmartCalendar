@@ -11,6 +11,25 @@ namespace SmartCalendar.Tests
 {    
     class TestProductDbSet : DbSet<Event>
     {
+        private ObservableCollection<Event> _data;
+
+        public TestProductDbSet()
+        {
+            _data = new ObservableCollection<Event>();
+        }
+
+        public override Event Add(Event entity)
+        {
+            _data.Add(entity);
+            return entity;
+        }
+
+        public override Event Remove(Event item)
+        {
+            _data.Remove(item);
+            return item;
+        }
+
         public override Event Find(params object[] keyValues)
         {
             return GetDemoEvent();

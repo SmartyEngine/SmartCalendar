@@ -10,5 +10,6 @@ namespace SmartCalendar.Models.Abstracts
     public interface IRepository
     {
         Task<IdentityResult> Update(Event item);
+        Task<IdentityResult> Remove(int id);
     }
 }

@@ -49,7 +49,25 @@ namespace SmartCalendar.Controllers
             }
             
             return Request.CreateResponse(HttpStatusCode.OK, item);
-        }        
+        }
+
+        [HttpDelete]
+        public async Task<HttpResponseMessage> RemoveEvent([FromBody] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            IdentityResult result = await repository.Remove(id);
+            HttpResponseMessage errorResult = GetErrorResult(result);
+
+            if (errorResult != null)
+            {
+                return errorResult;
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
 
         // DELETE api/<controller>/5
         public void Delete(int id)
