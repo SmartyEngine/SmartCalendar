@@ -86,5 +86,19 @@ namespace SmartCalendar.Models.EFRepositories
                 return IdentityResult.Failed(e.Message);
             }
         }
+
+        public async Task<Event> TakeEvent(string id)
+        {
+
+            Event dbEntry = await context.Events.FindAsync(id);
+            if (dbEntry != null)
+            {
+                return dbEntry;
+            }
+            else
+            {
+                return null;
+            }
+        } 
     }
 }
