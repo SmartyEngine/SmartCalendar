@@ -80,7 +80,23 @@ namespace SmartCalendar.Controllers
             }
 
             return new HttpResponseMessage(HttpStatusCode.OK);
-        }       
+        }
+
+        [HttpGet]
+        public async Task<HttpResponseMessage> ShowSingleEvent([FromBody] string id)
+        {
+
+            Event result = await repository.TakeEvent(id);
+
+            if (result == null)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+
+
+        }
 
         #region Helpers
         private HttpResponseMessage GetErrorResult(IdentityResult result)
