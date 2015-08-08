@@ -29,7 +29,7 @@ namespace SmartCalendar.Tests.Controllers
             
             //act
             controller.ModelState.AddModelError("","");
-            var response = await controller.UpdateEvent(GetDemoProduct());   
+            var response = await controller.UpdateEvent(GetDemoEvent());   
          
             //assert
             Assert.IsNotNull(response);            
@@ -61,7 +61,7 @@ namespace SmartCalendar.Tests.Controllers
             var controller = new EventController(repository);
             controller.Request = new HttpRequestMessage();
             controller.Request.SetConfiguration(new HttpConfiguration());
-            var item = GetDemoProduct();
+            var item = GetDemoEvent();
 
             //act
             var response = await controller.UpdateEvent(item);
@@ -76,7 +76,7 @@ namespace SmartCalendar.Tests.Controllers
             Assert.AreEqual(item.Id, resultEvent.Id);
         }
 
-        Event GetDemoProduct()
+        Event GetDemoEvent()
         {
             return new Event() {
                 Id = "1",
