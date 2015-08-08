@@ -15,7 +15,7 @@ using System.Collections.Generic;
 namespace SmartCalendar.Tests.Controllers
 {
     [TestClass]
-    public class EventControllerTest
+    public partial class EventControllerTest
     {
 
         [TestMethod]
