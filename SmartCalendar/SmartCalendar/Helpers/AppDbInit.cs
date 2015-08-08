@@ -25,7 +25,7 @@ namespace SmartCalendar.Helpers
             context.Events.Add(testEvent);
             base.Seed(context);
         }
-        public AppDbInit() { this.Seed(ApplicationDbContext.Create()); }
+        public AppDbInit() { }
 
     }
 }
