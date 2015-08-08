@@ -45,6 +45,7 @@ namespace SmartCalendar.Models.EFRepositories
                 dbEntry.DateStart = item.DateStart;
                 dbEntry.DateEnd = item.DateEnd;
                 dbEntry.Location = item.Location;
+                dbEntry.UserId = item.UserId;
             }
             else
             {

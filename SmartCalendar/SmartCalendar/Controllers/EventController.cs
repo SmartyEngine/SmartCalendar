@@ -25,13 +25,7 @@ namespace SmartCalendar.Controllers
         public string Get(int id)
         {
             return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-
-        }
+        }       
 
         [HttpPost]
         public async Task<HttpResponseMessage> CreateEvent([FromBody]Event item)
@@ -86,12 +80,7 @@ namespace SmartCalendar.Controllers
             }
 
             return new HttpResponseMessage(HttpStatusCode.OK);
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        }       
 
         #region Helpers
         private HttpResponseMessage GetErrorResult(IdentityResult result)
