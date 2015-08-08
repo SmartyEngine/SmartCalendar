@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using SmartCalendar.Models.Abstracts;
 
 namespace SmartCalendar.Models
@@ -34,6 +35,10 @@ namespace SmartCalendar.Models
         public DateTime DateEnd { get; set; }
         public string Location { get; set; }
         public Category Category { get; set; }
+
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 
     public enum Category { Home, Business, Study, Fun }
