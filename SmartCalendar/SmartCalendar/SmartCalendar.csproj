@@ -183,8 +183,8 @@
     </Compile>
     <Compile Include="Helpers\AppDbInit.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Models\Abstracts\IEventContext.cs" />
     <Compile Include="Models\Abstracts\IRepository.cs" />
+    <Compile Include="Models\Abstracts\IStoreAppContext.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EFRepositories\EventRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />

@@ -10,13 +10,13 @@ namespace SmartCalendar.Models.EFRepositories
 {
     public class EventRepository : IRepository
     {
-        private ApplicationDbContext context;
+        private IStoreAppContext context;
 
         public EventRepository()
             : this(ApplicationDbContext.Create())
         { }
 
-        public EventRepository(ApplicationDbContext appContext)
+        public EventRepository(IStoreAppContext appContext)
         {
             context = appContext;
         }
@@ -46,10 +46,11 @@ namespace SmartCalendar.Models.EFRepositories
             var result = await SaveChangesAsync();
             return result;
         }
+
         private async Task<IdentityResult> SaveChangesAsync()
         {
             try
-            {                
+            {
                 await context.SaveChangesAsync();
                 return IdentityResult.Success;
             }

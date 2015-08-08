@@ -19,77 +19,75 @@ namespace SmartCalendar.Tests.Controllers
     {
 
         [TestMethod]
-        public async Task UpdateEventTest_BadRequest()
+        public async Task UpdateEventTest_ShouldReturn_BadRequestStatusCode_and_NotNullContent()
         {
-            //arrange            
-            var mockRepository = new Mock<EventRepository>();
-            var controller = new EventController(mockRepository.Object);
+            //arrange
+            var controller = new EventController(new EventRepository());
             controller.Request = new HttpRequestMessage();
             controller.Request.SetConfiguration(new HttpConfiguration());
             
-            var testEvent = new Event()
-            {
-                Id = "1"               
-            };
+            
             //act
             controller.ModelState.AddModelError("","");
-            var response = await controller.UpdateEvent(testEvent);   
+            var response = await controller.UpdateEvent(GetDemoProduct());   
          
             //assert
             Assert.IsNotNull(response);            
-            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);            
-            //Assert.AreEqual(10, contentResult.Content.Id);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.IsNotNull(response.Content);
         }
 
         [TestMethod]
-        public async Task UpdateEventTest_NotFound()
+        public async Task UpdateEventTest_ShouldReturn_NotFoundStatusCode_And_NullContent()
         {
             //arrange            
-            var mockRepository = new Mock<EventRepository>();
-            var controller = new EventController(mockRepository.Object);
+            var controller = new EventController(new EventRepository());
             controller.Request = new HttpRequestMessage();
             controller.Request.SetConfiguration(new HttpConfiguration());
             
             //act
-            var response = await controller.UpdateEvent(null);
+            var response = await controller.UpdateEvent(new Event { Id="agfgfgf"});
 
             //assert
             Assert.IsNotNull(response);
-            Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);            
+            Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.IsNull(response.Content);
+        }
+        [TestMethod]
+        public async Task UpdateEventTest_ShouldReturnSameProduct_and_OkStatusCode()
+        {
+            //arrange
+            var repository = new EventRepository(new TestStoreAppContext());
+            var controller = new EventController(repository);
+            controller.Request = new HttpRequestMessage();
+            controller.Request.SetConfiguration(new HttpConfiguration());
+            var item = GetDemoProduct();
+
+            //act
+            var response = await controller.UpdateEvent(item);
+
+            //assert
+            Event resultEvent;
+
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(response.Content);
+            Assert.IsTrue(response.TryGetContentValue<Event>(out resultEvent));
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(item.Id, resultEvent.Id);
         }
 
-        //[TestMethod]
-        //public async Task UpdateEventTest_Accept()
-        //{
-        //    var events = new List<Event>(){
-        //        new Event() {
-        //            Id = "1",
-        //            DateAdd = DateTime.Now,
-        //            DateStart = DateTime.Now,
-        //            DateEnd = DateTime.Now,
-        //            Title = "testTitle",
-        //            Description = "testDescription",
-        //            Category = Category.Fun,
-        //            Location = "testLocation"
-        //        }
-        //    };
-        //    var mockContext = new Mock<ApplicationDbContext>();
-           
-        //    var mockRepository = new Mock<EventRepository>();
-            
-        //    var controller = new EventController(mockRepository.Object);
-            
-        //    controller.Request = new HttpRequestMessage();
-        //    controller.Request.SetConfiguration(new HttpConfiguration());
-            
-        //    //act
-        //    controller.ModelState.Clear();
-        //    var response = await controller.UpdateEvent(null);
-        //    //assert
-        //    Assert.IsNotNull(response);
-        //    Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
-        //}        
-
-
+        Event GetDemoProduct()
+        {
+            return new Event() {
+                Id = "1",
+                Title = "test",
+                Description = "test",
+                Location = "test",
+                Category = Category.Fun,
+                DateAdd = DateTime.Now,
+                DateEnd = DateTime.Now,
+                DateStart = DateTime.Now
+            };
+        }
     }
 }

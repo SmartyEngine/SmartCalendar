@@ -30,6 +30,7 @@ namespace SmartCalendar.Controllers
         // POST api/<controller>
         public void Post([FromBody]string value)
         {
+
         }
 
         [HttpPut]
@@ -46,7 +47,8 @@ namespace SmartCalendar.Controllers
             {
                 return errorResult;
             }
-            return Request.CreateResponse(HttpStatusCode.Accepted, item);
+            
+            return Request.CreateResponse(HttpStatusCode.OK, item);
         }        
 
         // DELETE api/<controller>/5

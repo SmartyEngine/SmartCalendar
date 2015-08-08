@@ -39,7 +39,7 @@ namespace SmartCalendar.Models
     public enum Category { Home, Business, Study, Fun }
 
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IEventContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IStoreAppContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -53,5 +53,9 @@ namespace SmartCalendar.Models
 
         public DbSet<Event> Events { get; set; }
 
+        public void MarkAsModified(Event item)
+        {
+            Entry(item).State = EntityState.Modified;
+        }
     }
 }
