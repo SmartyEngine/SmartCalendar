@@ -156,6 +156,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CreateEventTest.cs" />
     <Compile Include="Controllers\UnitTest1.cs" />
     <Compile Include="Controllers\RemoveEventTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

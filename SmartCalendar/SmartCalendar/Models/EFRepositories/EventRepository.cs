@@ -26,6 +26,13 @@ namespace SmartCalendar.Models.EFRepositories
             get { return context.Events; }
         }
 
+        public async Task<IdentityResult> Create(Event item)
+        {
+            context.Events.Add(item);
+            var result = await SaveChangesAsync();
+            return result;
+        }
+
         public async Task<IdentityResult> Update(Event item)
         {
             Event dbEntry = await context.Events.FindAsync(item.Id);

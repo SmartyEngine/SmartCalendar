@@ -33,6 +33,25 @@ namespace SmartCalendar.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<HttpResponseMessage> CreateEvent([FromBody]Event item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            IdentityResult result = await repository.Create(item);
+            HttpResponseMessage errorResult = GetErrorResult(result);
+
+            if (errorResult != null)
+            {
+                return errorResult;
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created);
+        }
+
+
         [HttpPut]
         public async Task<HttpResponseMessage> UpdateEvent([FromBody]Event item)
         {
